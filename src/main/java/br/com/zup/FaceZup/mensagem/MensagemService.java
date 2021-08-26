@@ -17,10 +17,10 @@ public class MensagemService {
     }
 
     public Mensagem cadastrarMensagem(Mensagem mensagem){
-        Usuario usuarioDestino = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuario_destino().getEmail());
-        Usuario usuarioOrigem = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuario_origem().getEmail());
-        mensagem.setUsuario_destino(usuarioDestino);
-        mensagem.setUsuario_origem(usuarioOrigem);
+        Usuario usuarioDestino = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuarioDestino().getEmail());
+        Usuario usuarioOrigem = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuarioOrigem().getEmail());
+        mensagem.setUsuarioOrigem(usuarioOrigem);
+        mensagem.setUsuarioDestino(usuarioDestino);
         return mensagemRepository.save(mensagem);
     }
 }

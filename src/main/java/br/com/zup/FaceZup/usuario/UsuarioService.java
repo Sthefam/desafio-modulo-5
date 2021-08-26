@@ -11,9 +11,9 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario buscarUsuarioPeloEmail(String email){
-        Usuario usuario = usuarioRepository.findUsuarioBy(email);
-        if(usuario != null){
-            return usuario;
+        Optional<Usuario> usuario = usuarioRepository.findById(email);
+        if(usuario.isPresent()){
+            return usuario.get();
         }
         throw new RuntimeException("Usuário não encontrado!");
     }

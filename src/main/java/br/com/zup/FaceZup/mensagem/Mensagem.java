@@ -14,9 +14,11 @@ public class Mensagem {
     @Column(nullable = false)
     private String mensagem;
     @ManyToOne
-    private Usuario usuario_origem;
+    @JoinColumn(name = "usuario_origem", nullable = false)
+    private Usuario usuarioOrigem;
     @ManyToOne
-    private Usuario usuario_destino;
+    @JoinColumn(name = "usuario_destino", nullable = false)
+    private Usuario usuarioDestino;
 
     public Mensagem() {
     }
@@ -37,19 +39,19 @@ public class Mensagem {
         this.mensagem = mensagem;
     }
 
-    public Usuario getUsuario_origem() {
-        return usuario_origem;
+    public Usuario getUsuarioOrigem() {
+        return usuarioOrigem;
     }
 
-    public void setUsuario_origem(Usuario usuario_origem) {
-        this.usuario_origem = usuario_origem;
+    public void setUsuarioOrigem(Usuario usuarioOrigem) {
+        this.usuarioOrigem = usuarioOrigem;
     }
 
-    public Usuario getUsuario_destino() {
-        return usuario_destino;
+    public Usuario getUsuarioDestino() {
+        return usuarioDestino;
     }
 
-    public void setUsuario_destino(Usuario usuario_destino) {
-        this.usuario_destino = usuario_destino;
+    public void setUsuarioDestino(Usuario usuarioDestino) {
+        this.usuarioDestino = usuarioDestino;
     }
 }
