@@ -18,7 +18,7 @@ public class Usuario {
     @Column(nullable = false)
     private String cargo;
 
-    @OneToMany(mappedBy = "usuarioOrigem")
+    @OneToMany(mappedBy = "origem")
     private List<Mensagem> mensagens;
 
     public Usuario() {

@@ -5,6 +5,10 @@ import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Service
 public class MensagemService {
     private MensagemRepository mensagemRepository;
@@ -16,11 +20,10 @@ public class MensagemService {
         this.usuarioService = usuarioService;
     }
 
-    public Mensagem cadastrarMensagem(Mensagem mensagem){
-        Usuario usuarioDestino = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuarioDestino().getEmail());
-        Usuario usuarioOrigem = usuarioService.buscarUsuarioPeloEmail(mensagem.getUsuarioOrigem().getEmail());
-        mensagem.setUsuarioOrigem(usuarioOrigem);
-        mensagem.setUsuarioDestino(usuarioDestino);
-        return mensagemRepository.save(mensagem);
+    public Mensagem cadastrarMensagem(String origem, String destino, String mensagem){
+        Usuario usuarioDestino = usuarioService.buscarUsuarioPeloEmail(destino);
+        Usuario usuarioOrigem = usuarioService.buscarUsuarioPeloEmail(origem);
+        return mensagemRepository.save(new Mensagem(mensagem, usuarioOrigem, usuarioDestino));
     }
+
 }

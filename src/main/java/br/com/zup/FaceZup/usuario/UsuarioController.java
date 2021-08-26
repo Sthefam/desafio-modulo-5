@@ -1,15 +1,15 @@
 package br.com.zup.FaceZup.usuario;
 
+import br.com.zup.FaceZup.mensagem.dtos.MensagensIdsDTO;
+import br.com.zup.FaceZup.mensagem.dtos.MensagensNaoLidasDTO;
 import br.com.zup.FaceZup.usuario.dtos.CadastrarUsuarioDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/usuarios")
 public class UsuarioController {
     private UsuarioService usuarioService;
     private ModelMapper modelMapper;
@@ -20,8 +20,17 @@ public class UsuarioController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping
+    @PostMapping("/usuario")
     public Usuario cadastrarUsuario(@RequestBody CadastrarUsuarioDTO usuarioDTO){
         return usuarioService.cadastrarUsuario(modelMapper.map(usuarioDTO,Usuario.class));
     }
+
+    @GetMapping("/usuario/perfil/{emailUsuario}")
+    public MensagensNaoLidasDTO filtrarPorMensagensNaoLidas(@PathVariable String emailUsuario){
+        MensagensNaoLidasDTO msgNaoLidas = new MensagensNaoLidasDTO();
+        msgNaoLidas.setQuantidade(usuarioService.filtrarPorMensagensNaoLidas(emailUsuario).size());
+        msgNaoLidas.setIds(usuarioService.filtrarPorMensagensNaoLidas(emailUsuario).stream().map(mensagem -> new MensagensIdsDTO(mensagem.getId())).collect(Collectors.toList()));
+        return msgNaoLidas;
+    }
+
 }

@@ -6,8 +6,8 @@ public class CadastrarMensagemDTO {
 
     private int id;
     private String mensagem;
-    private Usuario origem;
-    private Usuario destino;
+    private String origem;
+    private String destino;
 
     public CadastrarMensagemDTO() {
     }
@@ -28,19 +28,19 @@ public class CadastrarMensagemDTO {
         this.mensagem = mensagem;
     }
 
-    public Usuario getOrigem() {
+    public String getOrigem() {
         return origem;
     }
 
-    public void setOrigem(Usuario origem) {
+    public void setOrigem(String origem) {
         this.origem = origem;
     }
 
-    public Usuario getDestino() {
+    public String getDestino() {
         return destino;
     }
 
-    public void setDestino(Usuario destino) {
+    public void setDestino(String destino) {
         this.destino = destino;
     }
 }
