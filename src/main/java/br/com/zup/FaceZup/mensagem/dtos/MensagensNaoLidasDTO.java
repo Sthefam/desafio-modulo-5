@@ -7,6 +7,11 @@ public class MensagensNaoLidasDTO {
     private int quantidade;
     private List<MensagensIdsDTO> ids;
 
+    public MensagensNaoLidasDTO(int quantidade, List<MensagensIdsDTO> ids) {
+        this.quantidade = quantidade;
+        this.ids = ids;
+    }
+
     public MensagensNaoLidasDTO() {
     }
 
