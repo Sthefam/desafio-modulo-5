@@ -22,4 +22,9 @@ public class MensagemController {
         return mensagemService.cadastrarMensagem(mensagemDTO.getOrigem(), mensagemDTO.getDestino(), mensagemDTO.getMensagem());
     }
 
+    @GetMapping
+    public Mensagem exibirMensagem(@RequestParam(required = false) int id){
+        return mensagemService.exibirMensagem(id);
+    }
+
 }

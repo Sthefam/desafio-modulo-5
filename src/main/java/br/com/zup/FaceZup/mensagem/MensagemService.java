@@ -36,4 +36,8 @@ public class MensagemService {
         return mensagemRepository.save(new Mensagem(mensagem, usuarioOrigem, usuarioDestino));
     }
 
+    public Mensagem exibirMensagem(int id){
+        return buscaMensagemPeloId(id);
+    }
+
 }
