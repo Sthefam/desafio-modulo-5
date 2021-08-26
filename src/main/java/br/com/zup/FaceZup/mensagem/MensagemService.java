@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,15 @@ public class MensagemService {
     public MensagemService(MensagemRepository mensagemRepository, UsuarioService usuarioService) {
         this.mensagemRepository = mensagemRepository;
         this.usuarioService = usuarioService;
+    }
+
+    public Mensagem buscaMensagemPeloId(int id){
+        Optional<Mensagem> mensagemOptional = mensagemRepository.findById(id);
+
+        if(mensagemOptional.isPresent()){
+            return mensagemOptional.get();
+        }
+        throw new RuntimeException("Mensagem não encontrada!");
     }
 
     public Mensagem cadastrarMensagem(String origem, String destino, String mensagem){
