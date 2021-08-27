@@ -18,8 +18,8 @@ public class MensagemController {
     }
 
     @PostMapping
-    public Mensagem cadastrarMensagem(@RequestBody CadastrarMensagemDTO mensagemDTO){
-        return mensagemService.cadastrarMensagem(mensagemDTO.getOrigem(), mensagemDTO.getDestino(), mensagemDTO.getMensagem());
+    public void cadastrarMensagem(@RequestBody CadastrarMensagemDTO mensagemDTO){
+        mensagemService.cadastrarMensagem(mensagemDTO.getOrigem(), mensagemDTO.getDestino(), mensagemDTO.getMensagem());
     }
 
     @GetMapping

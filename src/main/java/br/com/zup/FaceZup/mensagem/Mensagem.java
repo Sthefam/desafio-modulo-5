@@ -30,6 +30,12 @@ public class Mensagem {
         this.dataHoraLeitura = dataHoraLeitura;
     }
 
+    public Mensagem(String mensagem, Usuario origem, Usuario destino) {
+        this.mensagem = mensagem;
+        this.origem = origem;
+        this.destino = destino;
+    }
+
     public Mensagem() {
     }
 
