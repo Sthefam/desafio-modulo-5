@@ -23,10 +23,11 @@ public class Mensagem {
     @JoinColumn(name = "usuario_destino", nullable = false)
     private Usuario destino;
 
-    public Mensagem(String mensagem, Usuario origem, Usuario destino) {
+    public Mensagem(String mensagem, Usuario origem, Usuario destino, LocalDate dataHoraLeitura) {
         this.mensagem = mensagem;
         this.origem = origem;
         this.destino = destino;
+        this.dataHoraLeitura = dataHoraLeitura;
     }
 
     public Mensagem() {

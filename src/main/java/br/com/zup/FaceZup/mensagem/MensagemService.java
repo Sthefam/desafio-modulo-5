@@ -5,6 +5,7 @@ import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -33,7 +34,14 @@ public class MensagemService {
     public Mensagem cadastrarMensagem(String origem, String destino, String mensagem){
         Usuario usuarioDestino = usuarioService.buscarUsuarioPeloEmail(destino);
         Usuario usuarioOrigem = usuarioService.buscarUsuarioPeloEmail(origem);
-        return mensagemRepository.save(new Mensagem(mensagem, usuarioOrigem, usuarioDestino));
+        return mensagemRepository.save(new Mensagem(mensagem, usuarioOrigem, usuarioDestino, LocalDate.now()));
+    }
+
+    public void mensagemAutomatica(Usuario destino){
+        Usuario sistema = new Usuario;
+        sistema.setEmail("sistema@email.com");
+        String mensagem = "O {"+destino.getNome()+"} leu sua mensagem.";
+        mensagemRepository.save(new Mensagem(mensagem,sistema,destino,LocalDate.now()));
     }
 
     public Mensagem exibirMensagem(int id){
