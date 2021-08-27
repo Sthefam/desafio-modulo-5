@@ -45,7 +45,10 @@ public class MensagemService {
     }
 
     public Mensagem exibirMensagem(int id){
-        return buscaMensagemPeloId(id);
+        Mensagem mensagem = buscaMensagemPeloId(id);
+        mensagemAutomatica(mensagem.getDestino());
+
+        return mensagem;
     }
 
 }
