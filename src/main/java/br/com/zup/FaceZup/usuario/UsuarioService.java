@@ -2,7 +2,6 @@ package br.com.zup.FaceZup.usuario;
 
 import br.com.zup.FaceZup.mensagem.Mensagem;
 import br.com.zup.FaceZup.mensagem.MensagemRepository;
-import br.com.zup.FaceZup.mensagem.MensagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +21,18 @@ public class UsuarioService {
 
     public Usuario buscarUsuarioPeloEmail(String email){
         Optional<Usuario> usuario = usuarioRepository.findById(email);
+
         if(usuario.isPresent()){
             return usuario.get();
         }
+
         throw new RuntimeException("Usuário não encontrado!");
+    }
+
+    public void usuarioExiste(String email){
+        if(!usuarioRepository.existsById(email)){
+            throw new RuntimeException("Usuário não existe!");
+        }
     }
 
     public Usuario cadastrarUsuario(Usuario usuario){
@@ -33,8 +40,9 @@ public class UsuarioService {
     }
 
     public List<Mensagem> filtrarPorMensagensNaoLidas(String email){
-        List<Mensagem> mensagens = mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
-        return mensagens;
+        usuarioExiste(email);
+
+        return mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
     }
 
 }
