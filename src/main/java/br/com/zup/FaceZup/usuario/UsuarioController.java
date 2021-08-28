@@ -6,6 +6,7 @@ import br.com.zup.FaceZup.mensagem.dtos.MensagensNaoLidasDTO;
 import br.com.zup.FaceZup.usuario.dtos.CadastrarUsuarioDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuario")
+    @ResponseStatus(HttpStatus.CREATED)
     public Usuario cadastrarUsuario(@RequestBody CadastrarUsuarioDTO usuarioDTO){
         return usuarioService.cadastrarUsuario(modelMapper.map(usuarioDTO,Usuario.class));
     }
