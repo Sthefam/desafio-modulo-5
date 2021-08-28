@@ -3,7 +3,7 @@ package br.com.zup.FaceZup.mensagem;
 import br.com.zup.FaceZup.usuario.Usuario;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mensagens")
@@ -18,12 +18,12 @@ public class Mensagem {
     @JoinColumn(name = "usuario_origem", nullable = false)
     private Usuario origem;
     private boolean visualizado;
-    private LocalDate dataHoraLeitura;
+    private LocalDateTime dataHoraLeitura;
     @ManyToOne
     @JoinColumn(name = "usuario_destino", nullable = false)
     private Usuario destino;
 
-    public Mensagem(String mensagem, Usuario origem, Usuario destino, LocalDate dataHoraLeitura) {
+    public Mensagem(String mensagem, Usuario origem, Usuario destino, LocalDateTime dataHoraLeitura) {
         this.mensagem = mensagem;
         this.origem = origem;
         this.destino = destino;
@@ -79,11 +79,11 @@ public class Mensagem {
         this.visualizado = visualizado;
     }
 
-    public LocalDate getDataHoraLeitura() {
+    public LocalDateTime getDataHoraLeitura() {
         return dataHoraLeitura;
     }
 
-    public void setDataHoraLeitura(LocalDate dataHoraLeitura) {
+    public void setDataHoraLeitura(LocalDateTime dataHoraLeitura) {
         this.dataHoraLeitura = dataHoraLeitura;
     }
 }

@@ -5,7 +5,7 @@ import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -38,17 +38,17 @@ public class MensagemService {
 
     public void mensagemAutomatica(Mensagem mensagem){
         Usuario sistema = usuarioService.buscarUsuarioPeloEmail("sistema@email.com");
-        if(!mensagem.getOrigem().getEmail().equals(sistema.getEmail())){
-            String msg = "O {"+mensagem.getDestino().getNome()+"} leu sua mensagem. Talvez ele ignore ou não.";
+        if(!mensagem.getOrigem().getEmail().equals(sistema.getEmail()) && !mensagem.isVisualizado()){
+            String msg = "O "+mensagem.getDestino().getNome()+" leu sua mensagem. Talvez ele ignore ou não.";
 
-            mensagemRepository.save(new Mensagem(msg,sistema,mensagem.getOrigem(),LocalDate.now()));
+            mensagemRepository.save(new Mensagem(msg,sistema,mensagem.getOrigem(), LocalDateTime.now()));
         }
     }
 
     public Mensagem exibirMensagem(int id){
         Mensagem mensagem = buscaMensagemPeloId(id);
         mensagem.setVisualizado(true);
-        mensagem.setDataHoraLeitura(LocalDate.now());
+        mensagem.setDataHoraLeitura(LocalDateTime.now());
         mensagemAutomatica(mensagem);
 
         return mensagemRepository.save(mensagem);
