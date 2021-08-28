@@ -3,7 +3,6 @@ package br.com.zup.FaceZup.mensagem.dtos;
 import br.com.zup.FaceZup.usuario.Usuario;
 
 public class CadastrarMensagemDTO {
-
     private int id;
     private String mensagem;
     private String origem;

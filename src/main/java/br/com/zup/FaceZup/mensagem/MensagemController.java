@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/chat")
 public class MensagemController {
@@ -20,7 +22,7 @@ public class MensagemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarMensagem(@RequestBody CadastrarMensagemDTO mensagemDTO){
+    public void cadastrarMensagem(@RequestBody @Valid CadastrarMensagemDTO mensagemDTO){
         mensagemService.cadastrarMensagem(mensagemDTO.getOrigem(), mensagemDTO.getDestino(), mensagemDTO.getMensagem());
     }
 
