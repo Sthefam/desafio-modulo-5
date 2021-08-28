@@ -1,5 +1,6 @@
 package br.com.zup.FaceZup.usuario;
 
+import br.com.zup.FaceZup.exceptions.UsuarioNaoEncontradoException;
 import br.com.zup.FaceZup.mensagem.Mensagem;
 import br.com.zup.FaceZup.mensagem.MensagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,12 @@ public class UsuarioService {
             return usuario.get();
         }
 
-        throw new RuntimeException("Usuário não encontrado!");
+        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
     }
 
     public void usuarioExiste(String email){
         if(!usuarioRepository.existsById(email)){
-            throw new RuntimeException("Usuário não existe!");
+            throw new UsuarioNaoEncontradoException("Usuário não existe!");
         }
     }
 
