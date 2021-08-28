@@ -1,22 +1,17 @@
 package br.com.zup.FaceZup.mensagem.dtos;
 
-import br.com.zup.FaceZup.usuario.Usuario;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class CadastrarMensagemDTO {
-    private int id;
+    @NotBlank(message = "{validation.mensagem.texto}")
     private String mensagem;
+    @Email(message = "{validation.mensagem.origem}")
     private String origem;
+    @Email(message = "{validation.mensagem.destino}")
     private String destino;
 
     public CadastrarMensagemDTO() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getMensagem() {
