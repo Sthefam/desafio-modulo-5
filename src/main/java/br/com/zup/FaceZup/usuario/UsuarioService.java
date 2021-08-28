@@ -32,7 +32,7 @@ public class UsuarioService {
 
     public void usuarioExiste(String email){
         if(!usuarioRepository.existsById(email)){
-            throw new UsuarioNaoEncontradoException("Usuário não existe!");
+            throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
         }
     }
 

@@ -1,5 +1,6 @@
 package br.com.zup.FaceZup.mensagem;
 
+import br.com.zup.FaceZup.exceptions.MensagemNaoEncontradaException;
 import br.com.zup.FaceZup.usuario.Usuario;
 import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MensagemService {
             return mensagemOptional.get();
         }
 
-        throw new RuntimeException("Mensagem não encontrada!");
+        throw new MensagemNaoEncontradaException("Mensagem não encontrada!");
     }
 
     public void cadastrarMensagem(String origem, String destino, String mensagem){
@@ -38,18 +39,23 @@ public class MensagemService {
 
     public void mensagemAutomatica(Mensagem mensagem){
         Usuario sistema = usuarioService.buscarUsuarioPeloEmail("sistema@email.com");
+
         if(!mensagem.getOrigem().getEmail().equals(sistema.getEmail()) && !mensagem.isVisualizado()){
             String msg = "O "+mensagem.getDestino().getNome()+" leu sua mensagem. Talvez ele ignore ou não.";
 
-            mensagemRepository.save(new Mensagem(msg,sistema,mensagem.getOrigem(), LocalDateTime.now()));
+            mensagemRepository.save(new Mensagem(msg,sistema,mensagem.getOrigem()));
         }
     }
 
     public Mensagem exibirMensagem(int id){
         Mensagem mensagem = buscaMensagemPeloId(id);
-        mensagem.setVisualizado(true);
-        mensagem.setDataHoraLeitura(LocalDateTime.now());
+
+        if(!mensagem.isVisualizado()){
+            mensagem.setDataHoraLeitura(LocalDateTime.now());
+        }
+
         mensagemAutomatica(mensagem);
+        mensagem.setVisualizado(true);
 
         return mensagemRepository.save(mensagem);
     }
