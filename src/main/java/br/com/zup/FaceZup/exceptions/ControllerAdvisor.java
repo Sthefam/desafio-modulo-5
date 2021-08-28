@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,14 @@ public class ControllerAdvisor {
         List<Erro> erros = fieldErrors.stream().map(objeto -> new Erro(objeto.getDefaultMessage())).collect(Collectors.toList());
 
         return new MensagemDeErro(400,erros);
+    }
+
+    @ExceptionHandler(UsuarioNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemDeErro manipularUsuarioNaoEncontradoException(UsuarioNaoEncontradoException exception){
+        List<Erro> erros = List.of(new Erro(exception.getMessage()));
+
+        return new MensagemDeErro(422, erros);
     }
 
 }
