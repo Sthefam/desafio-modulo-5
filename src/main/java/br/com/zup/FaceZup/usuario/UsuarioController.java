@@ -26,8 +26,8 @@ public class UsuarioController {
 
     @PostMapping("/usuario")
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario cadastrarUsuario(@RequestBody @Valid CadastrarUsuarioDTO usuarioDTO){
-        return usuarioService.cadastrarUsuario(modelMapper.map(usuarioDTO,Usuario.class));
+    public void cadastrarUsuario(@RequestBody @Valid CadastrarUsuarioDTO usuarioDTO){
+        usuarioService.cadastrarUsuario(modelMapper.map(usuarioDTO,Usuario.class));
     }
 
     @GetMapping("/usuario/perfil/{emailUsuario}")

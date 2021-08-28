@@ -36,8 +36,8 @@ public class UsuarioService {
         }
     }
 
-    public Usuario cadastrarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public void cadastrarUsuario(Usuario usuario){
+        usuarioRepository.save(usuario);
     }
 
     public List<Mensagem> filtrarPorMensagensNaoLidas(String email){
