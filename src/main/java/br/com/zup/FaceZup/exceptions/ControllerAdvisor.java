@@ -31,4 +31,12 @@ public class ControllerAdvisor {
         return new MensagemDeErro(422, erros);
     }
 
+    @ExceptionHandler(MensagemNaoEncontradaException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemDeErro manipularMensagemNaoEncontradaException(MensagemNaoEncontradaException exception){
+        List<Erro> erros = List.of(new Erro(exception.getMessage()));
+
+        return new MensagemDeErro(422, erros);
+    }
+
 }
