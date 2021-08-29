@@ -19,6 +19,11 @@ public class Comentario {
     public Comentario() {
     }
 
+    public Comentario(Usuario autor, String texto) {
+        this.autor = autor;
+        this.texto = texto;
+    }
+
     public int getId() {
         return id;
     }
