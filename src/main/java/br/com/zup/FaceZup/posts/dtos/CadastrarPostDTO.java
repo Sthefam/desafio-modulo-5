@@ -1,9 +1,12 @@
 package br.com.zup.FaceZup.posts.dtos;
 
-import br.com.zup.FaceZup.usuario.Usuario;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class CadastrarPostDTO {
+    @Email(message = "{validation.usuario.email}")
     private String autor;
+    @NotBlank(message = "{validation.post.texto}")
     private String texto;
 
     public CadastrarPostDTO() {

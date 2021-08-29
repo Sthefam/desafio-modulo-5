@@ -12,7 +12,7 @@ public class Comentario {
     private int id;
     @ManyToOne
     @JoinColumn(name = "usuario_autor", nullable = false)
-    private Usuario usuarioAutor;
+    private Usuario autor;
     @Column(nullable = false)
     private String texto;
 
@@ -27,12 +27,12 @@ public class Comentario {
         this.id = id;
     }
 
-    public Usuario getUsuarioAutor() {
-        return usuarioAutor;
+    public Usuario getAutor() {
+        return autor;
     }
 
-    public void setUsuarioAutor(Usuario usuarioAutor) {
-        this.usuarioAutor = usuarioAutor;
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
     }
 
     public String getTexto() {
