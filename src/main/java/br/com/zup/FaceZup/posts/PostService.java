@@ -34,6 +34,4 @@ public class PostService {
         postRepository.save(new Post(usuarioAutor,texto));
     }
 
-
-
 }
