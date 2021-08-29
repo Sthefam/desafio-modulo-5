@@ -38,7 +38,7 @@ public class MensagemService {
     }
 
     public void mensagemAutomatica(Mensagem mensagem){
-        Usuario sistema = usuarioService.buscarUsuarioPeloEmail("sistema@email.com");
+        Usuario sistema = usuarioService.buscarUsuarioSistema();
 
         if(!mensagem.getOrigem().getEmail().equals(sistema.getEmail()) && !mensagem.isVisualizado()){
             String msg = "O "+mensagem.getDestino().getNome()+" leu sua mensagem. Talvez ele ignore ou não.";
