@@ -1,6 +1,7 @@
 package br.com.zup.FaceZup.usuario;
 
 import br.com.zup.FaceZup.mensagem.Mensagem;
+import br.com.zup.FaceZup.posts.Post;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +21,9 @@ public class Usuario {
 
     @OneToMany(mappedBy = "origem")
     private List<Mensagem> mensagens;
+
+    @OneToMany(mappedBy = "usuarioAutor")
+    private List<Post> posts;
 
     public Usuario() {
     }
