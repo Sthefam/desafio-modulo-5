@@ -5,6 +5,8 @@ import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PostService {
     private PostRepository postRepository;
@@ -16,10 +18,22 @@ public class PostService {
         this.usuarioService = usuarioService;
     }
 
+    public Post buscarPostPeloId(int id){
+        Optional<Post> optionalPost = postRepository.findById(id);
+
+        if(optionalPost.isPresent()){
+            return optionalPost.get();
+        }
+
+        throw new RuntimeException("Post não encontrado!");
+    }
+
     public void cadastrarPost(String autor, String texto){
         Usuario usuarioAutor = usuarioService.buscarUsuarioPeloEmail(autor);
 
         postRepository.save(new Post(usuarioAutor,texto));
     }
+
+
 
 }
