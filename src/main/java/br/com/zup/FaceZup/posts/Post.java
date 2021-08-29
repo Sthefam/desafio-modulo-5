@@ -24,6 +24,11 @@ public class Post {
     public Post() {
     }
 
+    public Post(Usuario usuarioAutor, String texto) {
+        this.usuarioAutor = usuarioAutor;
+        this.texto = texto;
+    }
+
     public int getId() {
         return id;
     }

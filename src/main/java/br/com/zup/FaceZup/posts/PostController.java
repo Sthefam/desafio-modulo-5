@@ -25,7 +25,7 @@ public class PostController {
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void cadastrarPost(@RequestBody @Valid CadastrarPostDTO postDTO){
-        postService.cadastrarPost(modelMapper.map(postDTO,Post.class));
+        postService.cadastrarPost(postDTO.getAutor(),postDTO.getTexto());
     }
 
 
