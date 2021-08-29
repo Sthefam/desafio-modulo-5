@@ -30,20 +30,28 @@ public class UsuarioService {
         throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
     }
 
-    public void usuarioExiste(String email){
-        if(!usuarioRepository.existsById(email)){
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
-        }
+    public boolean usuarioExiste(String email){
+        return usuarioRepository.existsById(email);
     }
 
     public void cadastrarUsuario(Usuario usuario){
         usuarioRepository.save(usuario);
     }
 
-    public List<Mensagem> filtrarPorMensagensNaoLidas(String email){
-        usuarioExiste(email);
+    public Usuario buscarUsuarioSistema(){
+        if(!usuarioExiste("sistema@email.com")){
+            return usuarioRepository.save(new Usuario("Sistema","Automático","sistema@email.com","TI-Interno"));
+        }
 
-        return mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
+        return buscarUsuarioPeloEmail("sistema@email.com");
+    }
+
+    public List<Mensagem> filtrarPorMensagensNaoLidas(String email){
+        if(usuarioExiste(email)){
+            return mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
+        }
+
+        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
     }
 
 }
