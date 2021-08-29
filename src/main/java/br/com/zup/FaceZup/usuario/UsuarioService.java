@@ -3,6 +3,8 @@ package br.com.zup.FaceZup.usuario;
 import br.com.zup.FaceZup.exceptions.UsuarioNaoEncontradoException;
 import br.com.zup.FaceZup.mensagem.Mensagem;
 import br.com.zup.FaceZup.mensagem.MensagemRepository;
+import br.com.zup.FaceZup.posts.Post;
+import br.com.zup.FaceZup.posts.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,13 @@ import java.util.Optional;
 public class UsuarioService {
     private MensagemRepository mensagemRepository;
     private UsuarioRepository usuarioRepository;
+    private PostRepository postRepository;
 
     @Autowired
-    public UsuarioService(MensagemRepository mensagemRepository, UsuarioRepository usuarioRepository) {
+    public UsuarioService(MensagemRepository mensagemRepository, UsuarioRepository usuarioRepository, PostRepository postRepository) {
         this.mensagemRepository = mensagemRepository;
         this.usuarioRepository = usuarioRepository;
+        this.postRepository = postRepository;
     }
 
     public Usuario buscarUsuarioPeloEmail(String email){
@@ -49,6 +53,14 @@ public class UsuarioService {
     public List<Mensagem> filtrarPorMensagensNaoLidas(String email){
         if(usuarioExiste(email)){
             return mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
+        }
+
+        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
+    }
+
+    public List<Post> exibirTodosOsPostPorEmail(String email){
+        if(usuarioExiste(email)){
+            return postRepository.findAllByAutorEmailContains(email);
         }
 
         throw new UsuarioNaoEncontradoException("Usuário não encontrado!");

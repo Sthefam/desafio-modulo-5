@@ -3,6 +3,7 @@ package br.com.zup.FaceZup.usuario;
 import br.com.zup.FaceZup.mensagem.Mensagem;
 import br.com.zup.FaceZup.mensagem.dtos.MensagensIdsDTO;
 import br.com.zup.FaceZup.mensagem.dtos.MensagensNaoLidasDTO;
+import br.com.zup.FaceZup.posts.Post;
 import br.com.zup.FaceZup.usuario.dtos.CadastrarUsuarioDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class UsuarioController {
         List<Mensagem> mensagens = usuarioService.filtrarPorMensagensNaoLidas(emailUsuario);
 
         return new MensagensNaoLidasDTO(mensagens.size(),mensagens.stream().map(mensagem -> new MensagensIdsDTO(mensagem.getId())).collect(Collectors.toList()));
+    }
+
+    @GetMapping("usuario/posts/{emailUsuario}")
+    public List<Post> exibirPostsPorEmail(@PathVariable String emailUsuario){
+        return usuarioService.exibirTodosOsPostPorEmail(emailUsuario);
     }
 
 }

@@ -22,7 +22,7 @@ public class Usuario {
     @OneToMany(mappedBy = "origem")
     private List<Mensagem> mensagens;
 
-    @OneToMany(mappedBy = "usuarioAutor")
+    @OneToMany(mappedBy = "autor")
     private List<Post> posts;
 
     public Usuario() {

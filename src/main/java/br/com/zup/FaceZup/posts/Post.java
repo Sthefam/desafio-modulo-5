@@ -14,7 +14,7 @@ public class Post {
     private int id;
     @ManyToOne
     @JoinColumn(name = "usuario_autor",nullable = false)
-    private Usuario usuarioAutor;
+    private Usuario autor;
     @Column(nullable = false)
     private String texto;
 
@@ -24,8 +24,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(Usuario usuarioAutor, String texto) {
-        this.usuarioAutor = usuarioAutor;
+    public Post(Usuario autor, String texto) {
+        this.autor = autor;
         this.texto = texto;
     }
 
@@ -37,12 +37,12 @@ public class Post {
         this.id = id;
     }
 
-    public Usuario getUsuarioAutor() {
-        return usuarioAutor;
+    public Usuario getAutor() {
+        return autor;
     }
 
-    public void setUsuarioAutor(Usuario usuarioAutor) {
-        this.usuarioAutor = usuarioAutor;
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
     }
 
     public String getTexto() {
