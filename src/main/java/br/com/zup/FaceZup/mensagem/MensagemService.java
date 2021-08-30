@@ -1,6 +1,6 @@
 package br.com.zup.FaceZup.mensagem;
 
-import br.com.zup.FaceZup.exceptions.MensagemNaoEncontradaException;
+import br.com.zup.FaceZup.exceptions.NotFoundException;
 import br.com.zup.FaceZup.usuario.Usuario;
 import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class MensagemService {
             return mensagemOptional.get();
         }
 
-        throw new MensagemNaoEncontradaException("Mensagem não encontrada!");
+        throw new NotFoundException("Mensagem não encontrada!");
     }
 
     public void cadastrarMensagem(String origem, String destino, String mensagem){

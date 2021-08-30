@@ -1,5 +1,6 @@
 package br.com.zup.FaceZup.posts;
 
+import br.com.zup.FaceZup.exceptions.NotFoundException;
 import br.com.zup.FaceZup.usuario.Usuario;
 import br.com.zup.FaceZup.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class PostService {
             return optionalPost.get();
         }
 
-        throw new RuntimeException("Post não encontrado!");
+        throw new NotFoundException("Post não encontrado!");
     }
 
     public void cadastrarPost(String autor, String texto){

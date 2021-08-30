@@ -1,7 +1,12 @@
 package br.com.zup.FaceZup.comentarios.dtos;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class CadastrarComentarioDTO {
+    @Email(message = "{validation.usuario.email}")
     private String autor;
+    @NotBlank(message = "{validation.comentario.texto}")
     private String texto;
 
     public CadastrarComentarioDTO() {

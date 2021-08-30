@@ -30,7 +30,7 @@ public class PostController {
         postService.cadastrarPost(postDTO.getAutor(),postDTO.getTexto());
     }
 
-    @GetMapping("/posts/{idPost}")
+    @GetMapping("/post/{idPost}")
     public PostDTO exibirPost(@PathVariable int idPost){
         return modelMapper.map(postService.buscarPostPeloId(idPost), PostDTO.class);
     }

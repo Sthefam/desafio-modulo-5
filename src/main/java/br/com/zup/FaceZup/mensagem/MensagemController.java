@@ -26,9 +26,9 @@ public class MensagemController {
         mensagemService.cadastrarMensagem(mensagemDTO.getOrigem(), mensagemDTO.getDestino(), mensagemDTO.getMensagem());
     }
 
-    @GetMapping
-    public Mensagem exibirMensagem(@RequestParam(required = false) int id){
-        return mensagemService.exibirMensagem(id);
+    @GetMapping("/id/{idMensagem}")
+    public Mensagem exibirMensagem(@PathVariable int idMensagem){
+        return mensagemService.exibirMensagem(idMensagem);
     }
 
 }

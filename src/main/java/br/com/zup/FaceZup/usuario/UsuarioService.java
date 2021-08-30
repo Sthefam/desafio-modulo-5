@@ -1,6 +1,6 @@
 package br.com.zup.FaceZup.usuario;
 
-import br.com.zup.FaceZup.exceptions.UsuarioNaoEncontradoException;
+import br.com.zup.FaceZup.exceptions.NotFoundException;
 import br.com.zup.FaceZup.mensagem.Mensagem;
 import br.com.zup.FaceZup.mensagem.MensagemRepository;
 import br.com.zup.FaceZup.posts.Post;
@@ -31,7 +31,7 @@ public class UsuarioService {
             return usuario.get();
         }
 
-        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
+        throw new NotFoundException("Usuário não encontrado!");
     }
 
     public boolean usuarioExiste(String email){
@@ -55,7 +55,7 @@ public class UsuarioService {
             return mensagemRepository.findByVisualizadoFalseAndDestinoEmailContains(email);
         }
 
-        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
+        throw new NotFoundException("Usuário não encontrado!");
     }
 
     public List<Post> exibirTodosOsPostPorEmail(String email){
@@ -63,7 +63,7 @@ public class UsuarioService {
             return postRepository.findAllByAutorEmailContains(email);
         }
 
-        throw new UsuarioNaoEncontradoException("Usuário não encontrado!");
+        throw new NotFoundException("Usuário não encontrado!");
     }
 
 }
