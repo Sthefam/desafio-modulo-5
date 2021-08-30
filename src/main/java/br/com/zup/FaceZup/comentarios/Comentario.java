@@ -1,5 +1,6 @@
 package br.com.zup.FaceZup.comentarios;
 
+import br.com.zup.FaceZup.posts.Post;
 import br.com.zup.FaceZup.usuario.Usuario;
 
 import javax.persistence.*;
@@ -16,12 +17,17 @@ public class Comentario {
     @Column(nullable = false)
     private String texto;
 
+    @ManyToOne
+    @JoinColumn(name = "id_post", nullable = false)
+    private Post post;
+
     public Comentario() {
     }
 
-    public Comentario(Usuario autor, String texto) {
+    public Comentario(Usuario autor, String texto, Post post) {
         this.autor = autor;
         this.texto = texto;
+        this.post = post;
     }
 
     public int getId() {
@@ -46,5 +52,13 @@ public class Comentario {
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
