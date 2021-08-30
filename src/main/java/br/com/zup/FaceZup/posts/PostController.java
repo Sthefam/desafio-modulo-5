@@ -1,6 +1,9 @@
 package br.com.zup.FaceZup.posts;
 
+import br.com.zup.FaceZup.comentarios.ComentarioService;
+import br.com.zup.FaceZup.comentarios.dtos.CadastrarComentarioDTO;
 import br.com.zup.FaceZup.posts.dtos.CadastrarPostDTO;
+import br.com.zup.FaceZup.posts.dtos.PostDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +15,13 @@ import javax.validation.Valid;
 public class PostController {
     private ModelMapper modelMapper;
     private PostService postService;
+    private ComentarioService comentarioService;
 
     @Autowired
-    public PostController(ModelMapper modelMapper, PostService postService) {
+    public PostController(ModelMapper modelMapper, PostService postService, ComentarioService comentarioService) {
         this.modelMapper = modelMapper;
         this.postService = postService;
+        this.comentarioService = comentarioService;
     }
 
     @PostMapping("/post")
@@ -25,9 +30,10 @@ public class PostController {
         postService.cadastrarPost(postDTO.getAutor(),postDTO.getTexto());
     }
 
-    @GetMapping("posts/{idPost}")
-    public Post exibirPost(@PathVariable int id){
-        return postService.buscarPostPeloId(id);
+    @GetMapping("/posts/{idPost}")
+    public PostDTO exibirPost(@PathVariable int idPost){
+        return modelMapper.map(postService.buscarPostPeloId(idPost), PostDTO.class);
     }
+
 
 }
