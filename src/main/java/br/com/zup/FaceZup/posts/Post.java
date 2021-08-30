@@ -18,7 +18,7 @@ public class Post {
     @Column(nullable = false)
     private String texto;
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "post")
     private List<Comentario> comentarios;
 
     public Post() {
